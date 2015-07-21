@@ -54,7 +54,7 @@ RUN wget https://download.elastic.co/elasticsearch/elasticsearch/$Elasticsearch_
 RUN tar -zxf $Elasticsearch_version.tar.gz
 WORKDIR $Elasticsearch_version/config
 
-RUN echo "path.conf: /usr/es/conf" > elasticsearch.yml
+RUN mv elasticsearch.yml elasticsearch.yml.bak
 
 WORKDIR /usr/es
 
