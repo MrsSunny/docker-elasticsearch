@@ -124,7 +124,7 @@ cluster.routing.allocation.awareness.attributes: rack_id
 请看Es官方提供的方法：
 https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html
 
-注意：官网上说的方法不能砸容器里面执行，因为swap时系统功能，应该在宿主机上禁用swap。
+注意：官网上说的方法不能在容器里面执行，因为swap是系统功能，应该在宿主机上禁用swap。
 docker 容器里面的root的用户如果不是特权容器是没有办法修改这些参数的。还有就是容器最好不要用特权启动，那样容器里面的root和外面的root权限就一样了，很危险。
 
 ##修改fd 参数##
