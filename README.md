@@ -94,6 +94,8 @@ index.number_of_replicas: 2
 network.host: 10.0.0.1
 transport.tcp.port: 9300
 transport.tcp.compress: true
+path.data: /usr/es/data
+path.logs: /usr/es/logs
 http.port: 9200
 http.enabled: true
 node.master: true
