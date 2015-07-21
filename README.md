@@ -139,7 +139,7 @@ sysctl -w vm.max_map_count=262144
 
 ```
 
-sudo weave run 10.0.0.1/24 --name "dataNode1" -m 9g -v /opt/conf/data_node_1:/usr/es/conf -v /opt/data/data_node_1:/usr/es/data -v /opt/log/data_node_1:/usr/es/elasticsearch-1.7.0/logs debian/elasticsearch /opt/elasticsearch-1.7.0/bin/elasticsearch -D
+sudo weave run 10.0.0.1/24 --name "dataNode1" -m 9g -v /opt/conf/data_node_1:/usr/es/elasticsearch-1.7.0/config -v /opt/data/data_node_1:/usr/es/data -v /opt/logs/data_node_1:/usr/es/logs debian/elasticsearch /usr/es/elasticsearch-1.7.0/bin/elasticsearch -D
 
 ```
 
