@@ -80,7 +80,7 @@ debian/elasticsearch         latest              5f0668a6b9k0        About an ho
 
 ##安装weave##
 
-weave安装请看我的 https://github.com/MrsSunny/docker-weave这个项目
+weave安装请看我的 https://github.com/MrsSunny/docker-weave  这个项目
 
 ##配置Elasticsearch##
 elasticsearch.yml 内容如下
