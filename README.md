@@ -80,6 +80,7 @@ debian/elasticsearch         latest              5f0668a6b9k0        About an ho
 
 ##安装weave##
 
+<<<<<<< HEAD
 ##安装 weave ##
 ```
 sudo wget -O /usr/local/bin/weave https://raw.githubusercontent.com/zettio/weave/master/weave
@@ -178,6 +179,9 @@ sudo weave expose 10.0.0.254/24
 ![](images/weave.png)
 
 从图中可以看到容器之间是怎么跨主机通信的，性能问题可能就住要集中在weave Router上面了
+=======
+weave安装请看我的 https://github.com/MrsSunny/docker-weave  这个项目
+>>>>>>> bb247e4ca43c7ca5c82f89276d592049694937ba
 
 ##配置Elasticsearch##
 elasticsearch.yml 内容如下
