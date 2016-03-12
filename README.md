@@ -80,7 +80,104 @@ debian/elasticsearch         latest              5f0668a6b9k0        About an ho
 
 ##安装weave##
 
-weave安装请看我的 https://github.com/MrsSunny/docker-weave这个项目
+##安装 weave ##
+```
+sudo wget -O /usr/local/bin/weave https://raw.githubusercontent.com/zettio/weave/master/weave
+sudo chmod a+x /usr/local/bin/weave
+
+weave launch && weave launch-dns && weave launch-proxy
+
+sudo weave launch
+
+sudo weave ps 查看weave的路由状态
+
+sudo weave status 查看weave状态
+
+sudo weave expose <addr> 添加IP，能够使主机访问container
+
+```
+
+##weave 启动container##
+
+在物理机A（192.168.1.135）上启动Container
+
+```
+
+sudo weave run 10.0.0.1/24 --name "dataNode1" -m 4g -v /opt/conf/data_node_1:/usr/tomcat/conf -v /opt/data/data_node_1:/usr/tomcat/data debian/tomcat
+
+```
+
+在物理机B（192.168.1.136）上启动Container
+
+```
+
+sudo weave run 10.0.0.2/24 --name "dataNode2" -m 4g -v /opt/conf/data_node_2:/usr/tomcat/conf -v /opt/data/data_node_2:/usr/tomcat/data debian/tomcat
+
+```
+
+在物理机A（192.168.1.135）上执行
+
+```
+
+sudo weave launch
+
+```
+
+在物理机B（192.168.1.136）上执行
+
+```
+
+sudo weave launch 192.168.1.136
+
+sudo weave connect 192.168.1.135
+
+```
+
+
+
+
+##weave实现container跨主机互联需要注意的地方##
+
+注意：
+
+1.weave 的应用隔离功能
+
+不同子网的container之间是默认隔离的，即使他们在同一台机器上面也不能ping通，不同物理机之间的容器也是默认隔离的。
+所以在weave启动container的时候 集群应用的IP必须在同一个字网下面。10.0.0.1，10.0.0.2，而不能是10.0.0.1，10.0.1.1.
+
+2.当container关闭需要重新启动的时候
+	建议用weave启动container。
+	这时候必须制定addr，否则ip会改变。
+	
+	
+```
+	sudo weave start 10.0.0.1/24 node1
+	sudo weave start 10.0.0.2/24 node2
+	sudo weave start 10.0.0.3/24 node3
+	sudo weave start 10.0.0.4/24 node4
+	
+```
+3.宿主机器与container通信的时候，需要执行下面的语句：
+
+```
+sudo weave expose <addr> 添加IP，能够使主机访问container
+此处的addr必须是没有被使用的addr。
+
+比如：
+
+sudo weave expose 10.0.0.254/24
+
+这个10.0.0.254/24地址必须是没有被使用的。
+
+```
+
+4.使用sudo weave expose 10.0.0.254/24 这种方式能够使宿主机和container通信，但是当宿主机重新启动的时候这个值就不存在了，建议开机启动的时候就设置这个值。
+
+##weave 数据传输图##
+(此图是转载的)
+![](images/weave.png)
+
+从图中可以看到容器之间是怎么跨主机通信的，性能问题可能就住要集中在weave Router上面了
 
 ##配置Elasticsearch##
 elasticsearch.yml 内容如下
