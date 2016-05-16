@@ -184,6 +184,11 @@ elasticsearch.yml 内容如下
 ```
 
 cluster.name: aaaaaaa-name
+script.groovy.sandbox.enabled: true
+script.inline: on
+script.indexed: on
+script.search: on
+script.engine.groovy.inline.aggs: on
 node.name: nade_01
 index.number_of_shards: 8
 index.number_of_replicas: 2
